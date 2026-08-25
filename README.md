@@ -38,6 +38,12 @@ history fallback required to preserve arbitrary paths. To build it locally:
 podman build -f Containerfile -t my.personal-agent.org .
 ```
 
+## Versioning
+
+Releases use CalVer. Git tags follow `vYYYY.M.D`, with an optional fourth sequence component for
+multiple releases on the same day: `vYYYY.M.D.N`. Container releases are published with both the
+Git tag and the CalVer value without the `v` prefix.
+
 ## Security model
 
 - only `http` and `https` instance origins are accepted;

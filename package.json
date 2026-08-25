@@ -1,6 +1,6 @@
 {
   "name": "my.personal-agent.org",
-  "version": "0.1.0",
+  "version": "2026.8.26",
   "private": true,
   "description": "Client-side redirect portal for self-hosted Personal Agent instances",
   "type": "module",
