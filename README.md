@@ -23,6 +23,21 @@ pnpm dev       # http://127.0.0.1:9100
 pnpm check     # formatting, lint, types, tests, production build
 ```
 
+## Container
+
+The container is published for `linux/amd64` and `linux/arm64`:
+
+```bash
+podman run --rm -p 8080:8080 ghcr.io/personal-agent-org/my.personal-agent.org:latest
+```
+
+Then open <http://127.0.0.1:8080>. The image runs as an unprivileged user and includes the
+history fallback required to preserve arbitrary paths. To build it locally:
+
+```bash
+podman build -f Containerfile -t my.personal-agent.org .
+```
+
 ## Security model
 
 - only `http` and `https` instance origins are accepted;
