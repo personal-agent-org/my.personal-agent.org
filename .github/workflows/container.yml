@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
 
 concurrency:
   group: container-${{ github.ref }}
@@ -45,7 +46,8 @@ jobs:
             type=sha,prefix=sha-
             type=ref,event=tag
             type=match,pattern=^v(.*)$,group=1
-      - uses: docker/build-push-action@v6
+      - id: build
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: Containerfile
@@ -55,3 +57,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - uses: sigstore/cosign-installer@v4.1.2
+      - name: Sign the container image
+        run: >-
+          cosign sign --yes --recursive
+          ghcr.io/personal-agent-org/my.personal-agent.org@${{ steps.build.outputs.digest }}
