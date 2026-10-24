@@ -1,4 +1,4 @@
-FROM docker.io/library/node:22-alpine AS build
+FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914 AS build
 
 WORKDIR /app
 RUN corepack enable
@@ -10,7 +10,7 @@ COPY . .
 RUN pnpm install --offline --frozen-lockfile && pnpm build
 
 
-FROM docker.io/library/nginx:1.29-alpine AS runtime
+FROM docker.io/library/nginx:1.29-alpine@sha256:5616878291a2eed594aee8db4dade5878cf7edcb475e59193904b198d9b830de AS runtime
 
 LABEL org.opencontainers.image.source="https://github.com/personal-agent-org/my.personal-agent.org" \
       org.opencontainers.image.description="Client-side instance link portal for Personal Agent" \
